@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style type="text/css">
+    *{
+    	margin: 0;
+    	padding: 0;
+    }
+
+    canvas{
+    	display: block;
+		margin: 0 auto;
+		border: 1px solid red;
+    }
+    </style>
+</head>
+
+<body>
+	<canvas id="cvs" width="360" height="512"></canvas>
+
+	<script type="text/javascript" src="js/game.js"></script>
+	<script type="text/javascript" src="js/background.js"></script>
+	<script type="text/javascript" src="js/bird.js"></script>
+	<script type="text/javascript" src="js/pipe.js"></script>
+    <script type="text/javascript">
+    var cvs = document.getElementById("cvs");
+    var ctx = cvs.getContext("2d");
+    var imagesArr = ["images/bg_day.png", "images/bird0_0.png", "images/bird0_1.png", "images/bird0_2.png", "images/land.png", "images/pipe_down.png", "images/pipe_up.png"];
+
+    //实例化对象
+    loadImage(imagesArr, function(arr) {
+    	//鸟类
+	    var bird = new Bird(arr.slice(1,4),100,100,4);
+	    //管道
+	    var pipe = new Pipe(arr[5],arr[6],4,360);
+	    //地面
+	    var land = new Background(arr[4],4,0,400);
+	    //山背景
+	    var mountain = new Background(arr[0],2,0,0);
+        // console.log(arr);
+
+        window.game = new Game(ctx,bird,pipe,land,mountain);
+    });
+
+
+    function loadImage(arr, callback) {
+        //定义信号量，用来判断图片加载的数量
+        var idx = 0;
+        var loadImageArr = [];
+        //为避免fro循环时onload的异步加载，使用forEach方法来将每个元素添加到数组
+        arr.forEach(function(element, index) {
+            var img = new Image();
+            img.src = element;
+            img.onload = function() {
+                idx++;
+                //将当前图片（this）添加到数组
+                loadImageArr[index] = this;
+                //当图片都加载完毕后再执行回调函数
+                if (idx === arr.length) {
+                    //将存放图片的数组放入回调函数中
+                    callback(loadImageArr);
+                }
+            }
+        });
+    }
+    </script>
+</body>
+
+</html>
