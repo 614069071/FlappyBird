@@ -1,5 +1,4 @@
 /**
- * /
  * @param {[type]} img  [背景图片地址]
  * @param {[type]} step [步长]
  * @param {[type]} x    [背景x位置]

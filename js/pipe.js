@@ -1,5 +1,4 @@
 /**
- * /
  * @param {[type]} pipeup   [上管道地址]
  * @param {[type]} pipedown [下管道地址]
  * @param {[type]} step     [步长]
@@ -19,7 +18,6 @@ function Pipe(pipeup,pipedown,step,x) {
 	//计数器
 	this.count = 0;
 }
-
 
 //创建新的管子
 Pipe.prototype.createPipe = function(argument){

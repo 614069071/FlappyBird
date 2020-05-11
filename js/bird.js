@@ -1,5 +1,4 @@
 /**
- * /
  * @param {[type]} imgArr [鸟图片地址]
  * @param {[type]} x      [鸟出现的x位置]
  * @param {[type]} y      [鸟出现的y位置]
